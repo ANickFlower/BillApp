@@ -14,4 +14,4 @@ web-build/
 
 .env
 
-*.txt
+logins.txt
