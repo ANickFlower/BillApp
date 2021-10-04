@@ -8,15 +8,14 @@ import {
   View,
 } from "react-native";
 import { Icon, Input } from "react-native-elements";
-import { WASTEMANAGEMENT_USERNAME } from "@env";
 
 const WasteManagementScreen = () => {
   const navigation = useNavigation();
   const [value, setValue] = useState({
-    userename: "",
+    username: "",
     password: "",
   });
-  const envfile = require;
+
   return (
     <View style={styles.container}>
       <Text style={styles.question}>
@@ -26,7 +25,7 @@ const WasteManagementScreen = () => {
         <Text style={styles.text}>Your Username</Text>
         <Input
           style={styles.input}
-          placeholder={WASTEMANAGEMENT_USERNAME}
+          placeholder={"Username"}
           onChangeText={(text) => setValue({ ...value, username: text })}
           leftIcon={
             <Icon
