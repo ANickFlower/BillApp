@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   WASTEMANAGEMENT_USERNAME,
   WASTEMANAGEMENT_PASSWORD,
@@ -6,7 +5,6 @@ import {
   WASTEMANAGEMENT_APIKEY_CUSTID,
   WASTEMANAGEMENT_APIKEY_DATA,
 } from "@env";
-import { useDispatch } from "react-redux";
 import { AsyncStorage } from "react-native";
 
 async function login() {
@@ -41,7 +39,7 @@ async function login() {
 
   const custId = res.data.linkedAccounts[0].custAccountId;
   response = await fetch(
-    `https://rest-api.wm.com/account/${custId}/invoice?lang=en_US&fromDate=2020-10-03&userId=${id}`,
+    `https://rest-api.wm.com/payment/account/${custId}/schedulepayment?userId=${id}&lang=en_US`,
     {
       method: "GET",
       headers: {
@@ -51,17 +49,13 @@ async function login() {
     }
   );
   res = await response.json();
-  return res.body.balances.filter((item) => {
-    if (item.type === "Current") {
-      return item;
-    }
-  });
+  return res.data.schedulePaymentDetails;
 }
 
 const WasteManagementLogin = async (data, setData) => {
   const wmInfo = await login();
   let object = {
-    date: wmInfo[0].date.slice(5),
+    date: wmInfo[0].paymentDate.slice(5),
     amount: wmInfo[0].amount,
     key: "wasteManagement",
     image: require("../assets/wasteManagement.png"),

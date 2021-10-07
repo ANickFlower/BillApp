@@ -9,26 +9,6 @@ const HomeScreen = () => {
   const [ready, setReady] = useState(false);
   const [data, setData] = useState(initialData);
 
-  // const addData = (newData) => {
-  //   const newDataList = [...data, newData];
-  //   AsyncStorage.setItem("data", JSON.stringify(newDataList))
-  //     .then((data) => {
-  //       if (data !== null) {
-  //         setData(JSON.parse(data));
-  //       }
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
-  // const clearData = () => {
-  //   AsyncStorage.setItem("data", JSON.stringify([]))
-  //     .then((data) => {
-  //       if (data !== null) {
-  //         setData([]);
-  //       }
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
-
   const loadEverything = async () => {
     await WasteManagementLogin(data, setData);
     loadData();
@@ -39,7 +19,6 @@ const HomeScreen = () => {
       .then((data) => {
         if (data !== null) {
           setData(JSON.parse(data));
-          console.log(data);
         }
       })
       .catch((error) => console.log(error));
